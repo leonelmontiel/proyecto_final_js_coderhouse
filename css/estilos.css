@@ -1,0 +1,49 @@
+body {
+    font-family: 'Kumbh Sans', sans-serif;
+}
+
+.alto {
+    height: 90vh;
+}
+
+.borde {    
+    width: 95%;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.171);
+}
+
+header .nav {
+    height: 10vh;
+}
+
+header a {
+    text-decoration: none;
+}
+
+header .item {    
+    color: gray;
+    font-size: 0.9em;
+}
+
+#carrito_img {
+    width: 3vh;
+}
+
+#perfil_img {
+    width: 5vh;
+}
+
+main {
+    padding: 10vh;
+}
+
+.carousel-inner {
+    border-radius: 25px;
+}
+
+.info__product h6, .info__product p{
+    font-size: 0.8em;
+}
+
+.info__product h6 {
+    font-weight: 600;
+}
