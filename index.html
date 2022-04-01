@@ -168,14 +168,22 @@
             <div class="col-9 contact">
                 <div class="row">
                     <div class="col-6">
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Correo electrónico</label>
-                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                          </div>
-                          <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">¡Dejanos tu consulta!</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                          </div>
+                        <form method="post" name="contacto" action="mailto:leonel.montiel@outlook.com" enctype="text/plain">
+                            <div class="mb-3">                            
+                                <label class="form-label">Nombre y apellido</label>
+                                <input type="text" name="nombre" class="form-control">
+                            </div>
+                            <div class="mb-3">                            
+                                <label for="exampleFormControlInput1" class="form-label">Correo electrónico</label>
+                                <input type="email" name="correo" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                            </div>
+                              <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label">¡Dejanos tu consulta!</label>
+                                <textarea name="consulta" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div>
+                            <input name="borrar" type="reset" value="Borrar">
+                            <input name="enviar" type="submit" value="Enviar">
+                        </form>                        
                     </div>
                     <div class="col-6 d-flex justify-content-center align-items-center text-center">
                         <div class="row">
