@@ -33,7 +33,7 @@ class Stock {
     agregarProducto(prod) {
         if (prod.tipo == this.tipo) {
             this.productos.push(prod);
-            console.log(`El producto ${prod.marca} ${prod.modelo} fue agregado al stock`);
+            console.log(`El producto ${prod.marca} ${prod.modelo} fue agregado al stock de tipo ${this.tipo}`);
         } else {
             console.log(`El producto ${prod.marca} ${prod.modelo} no fue agregado al stock porque no es un par de ${this.tipo}`);
         }
@@ -109,7 +109,7 @@ class GestorStock {
         return listaProductos.filter(prod => prod.color == color);
     }
 
-    // DEVUELVEN UN ELEMENTO
+    // DEVUELVEN UN OBJETO
 
     stockDeTipo_(tipo) {
         return this.stocks.find(stock => stock.tipo == tipo);
@@ -126,6 +126,12 @@ class GestorStock {
 
     algunoConColor_En_(color, listaProductos) {
         return listaProductos.find(prod => prod.color === color);
+    }
+
+    //
+
+    precioDeModelo_En_(modeloProducto, listaProductos) {
+        return listaProductos.find(prod => prod.modelo == modeloProducto).precio;
     }
 }
 
@@ -299,4 +305,12 @@ gestorStock.agregarStock(stockMocasines);
 
 /////////////////////////////////////////////
 
-gestorCompra.iniciarCompra();
+let precioCasuales = gestorStock.precioDeModelo_En_("OTOÑO", stockCasuales.productos);
+
+let divPrecio = document.getElementById("precio");
+divPrecio.innerText = `$${precioCasuales}`;
+
+let botonComprar = document.getElementById("btnCompra");
+botonComprar.onclick = () => {
+    gestorCompra.iniciarCompra();
+}
