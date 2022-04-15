@@ -1,3 +1,5 @@
+// CÓDIGO PARA DESAFÍO COMPLEMENTARIO: INTERACTUAR CON HTML
+
 let feriados = document.getElementById("feriados");
 
 let identificadorIntervaloDeTiempo;
@@ -27,6 +29,7 @@ repetirCadaSegundo();
 
 //////////////////////////////
 
+// CÓDIGO PARA DESAFÍO: INCORPORAR EVENTOS
 
 let form = document.getElementById("form");
 form.addEventListener("submit", validarFormulario);
