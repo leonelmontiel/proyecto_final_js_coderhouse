@@ -28,4 +28,20 @@ repetirCadaSegundo();
 //////////////////////////////
 
 
+let form = document.getElementById("form");
+form.addEventListener("submit", validarFormulario);
 
+function validarFormulario(e) {
+    e.preventDefault();
+    formulario = e.target;
+    nombre = formulario.children[0].children[0].value;
+    correo = formulario.children[1].children[0].value;
+    asunto = formulario.children[2].children[0].value;
+    mensaje = formulario.children[3].children[1].value;
+    console.log(`Datos del formulario ingresado:
+    Nombre: ${nombre}
+    Correo: ${correo}
+    Asunto: ${asunto}
+    Mensaje: ${mensaje}`);
+    alert(`Muchas gracias ${nombre}, en breve nos contactaremos con vos!`)
+}

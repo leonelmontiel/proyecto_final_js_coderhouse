@@ -313,4 +313,4 @@ divPrecio.innerText = `$${precioCasuales}`;
 let botonComprar = document.getElementById("btnCompra");
 botonComprar.onclick = () => {
     gestorCompra.iniciarCompra();
-} 
+}
