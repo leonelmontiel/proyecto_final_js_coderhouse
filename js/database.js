@@ -310,7 +310,7 @@ let precioCasuales = gestorStock.precioDeModelo_En_("OTOÑO", stockCasuales.prod
 let divPrecio = document.getElementById("precio");
 divPrecio.innerText = `$${precioCasuales}`;
 
- let botonComprar = document.getElementById("btnCompra");
+let botonComprar = document.getElementById("btnCompra");
 botonComprar.onclick = () => {
     gestorCompra.iniciarCompra();
 } 
