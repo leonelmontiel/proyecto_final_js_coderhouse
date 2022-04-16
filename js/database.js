@@ -22,6 +22,26 @@ let infoProducto = (producto) => {
 
 }
 
+//INTENTANDO HACER UN ABSTRACT/FACTORY METHOD
+
+class Casual extends Producto {
+    constructor(marca, modelo, tipo, talle, color, precio) {
+        super(marca, modelo, tipo, talle, color, precio);
+    }
+}
+
+class Deportiva extends Producto {
+    constructor(marca, modelo, tipo, talle, color, precio) {
+        super(marca, modelo, tipo, talle, color, precio);
+    }
+}
+
+class Mocasin extends Producto {
+    constructor(marca, modelo, tipo, talle, color, precio) {
+        super(marca, modelo, tipo, talle, color, precio);
+    }
+}
+
 ////////////////////////////////////////////
 
 class Stock {

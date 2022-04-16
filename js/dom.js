@@ -40,11 +40,14 @@ class Formulario {
     }
 }
 
+//USAR LOCALSTORAGE Y JSON
 let baseDeDatosForm = []; //lista de formularios ingresados
 
 function almacenarForm(nombre, correo, asunto, mensaje) {
     const newForm = new Formulario(nombre, asunto, correo, mensaje);
     baseDeDatosForm.push(newForm);
+    //aplicando localStorage y JSON
+    localStorage.setItem(`Formularios`, JSON.stringify(baseDeDatosForm));
 }
 
 
