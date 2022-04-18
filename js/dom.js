@@ -71,3 +71,5 @@ function validarFormulario(e) {
     console.log(`CANTIDAD DE FORMULARIOS EN BASE DE DATOS: ${baseDeDatosForm.length}`);
     alert(`Muchas gracias ${nombre}, en breve nos contactaremos con vos!`)
 }
+
+// REEMPLAZAR IMAGEN PERFIL POR BOTÓN "INGRESAR" QUE LANCE UN MODAL
