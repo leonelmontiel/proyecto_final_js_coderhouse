@@ -60,25 +60,4 @@ function validarFormulario(e) {
     alert(`Muchas gracias ${nombre}, en breve nos contactaremos con vos!`)
 }
 
-function almacenarForm(nombre, correo, asunto, mensaje) {    
-    crearBaseFormSiNoHay(); // creo una nueva base de datos de formularios si no existiese en el localStorage
-    const newForm = new Formulario(nombre, asunto, correo, mensaje);
-    const baseDatos = JSON.parse(localStorage.getItem(`Formularios`)); //solicito el array de fomrularios alojado en el localStorage
-    baseDatos.push(newForm); //agrego el nuevo formulario    
-    localStorage.setItem(`Formularios`, JSON.stringify(baseDatos)); //actualizo la base de datos de formularios en el localStorage
-}
-
-function crearBaseFormSiNoHay() {
-    if (localStorage.getItem(`Formularios`) == null) {
-        localStorage.setItem(`Formularios`, JSON.stringify([]));
-    }
-}
-
-const cantFormularios = () => {
-    return JSON.parse(localStorage.getItem(`Formularios`)).length;
-}
-
-
-
-
 // REEMPLAZAR IMAGEN PERFIL POR BOTÓN "INGRESAR" QUE LANCE UN MODAL
