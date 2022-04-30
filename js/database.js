@@ -1,46 +1,87 @@
-class Producto {
-    constructor(marca, modelo, tipo, talle, color, precio) {
+class Formulario {
+    constructor(nombrePersona, email, asunto, mensaje) {
+        this.nombre = nombrePersona;
+        this.email = email;
+        this.asunto = asunto;
+        this.mensaje = mensaje;
+    }
+}
+
+ function almacenarForm(nombre, correo, asunto, mensaje) {    
+    crearBaseFormSiNoHay(); // creo una nueva base de datos de formularios si no existiese en el localStorage
+    const newForm = new Formulario(nombre, correo, asunto, mensaje);
+    const baseDatos = JSON.parse(localStorage.getItem(`Formularios`)); //solicito el array de fomrularios alojado en el localStorage
+    baseDatos.push(newForm); //agrego el nuevo formulario    
+    localStorage.setItem(`Formularios`, JSON.stringify(baseDatos)); //actualizo la base de datos de formularios en el localStorage
+}
+
+function crearBaseFormSiNoHay() {
+    if (localStorage.getItem(`Formularios`) == null) {
+        localStorage.setItem(`Formularios`, JSON.stringify([]));
+    }
+}
+
+const cantFormularios = () => {
+    return JSON.parse(localStorage.getItem(`Formularios`)).length;
+}
+
+/* class Calzado {
+    constructor(tipo, marca, modelo, talle, color, precio) {
+        this.id = 0;
+        this.tipo = tipo.toUpperCase();
         this.marca = marca.toUpperCase();
         this.modelo = modelo.toUpperCase();
-        this.tipo = tipo.toUpperCase();
         this.talle = talle;
         this.color = color.toUpperCase();
         this.precio = precio;
-        this.vendido = false;
     }
 
-    vender() {
-        this.vendido = true;
-    }
-}
-
-let infoProducto = (producto) => {
-
-    for (let propiedad in producto) {
-        console.log(`${propiedad}: ${producto[propiedad]}`);
-    }
-
-}
-
-//INTENTANDO HACER UN ABSTRACT/FACTORY METHOD
-
-class Casual extends Producto {
-    constructor(marca, modelo, tipo, talle, color, precio) {
-        super(marca, modelo, tipo, talle, color, precio);
+    setID(id) {
+        this.id = id;
     }
 }
 
-class Deportiva extends Producto {
-    constructor(marca, modelo, tipo, talle, color, precio) {
-        super(marca, modelo, tipo, talle, color, precio);
+class CalzadoCasual extends Calzado {
+    constructor(marca, modelo, talle, color, precio) {
+        super("CASUAL", marca, modelo, talle, color, precio);
     }
 }
 
-class Mocasin extends Producto {
-    constructor(marca, modelo, tipo, talle, color, precio) {
-        super(marca, modelo, tipo, talle, color, precio);
+class CalzadoDeportivo extends Calzado {
+    constructor(marca, modelo, talle, color, precio) {
+        super("DEPORTIVO", marca, modelo, talle, color, precio);
     }
 }
+
+class CalzadoMocasin extends Calzado {
+    constructor(marca, modelo, talle, color, precio) {
+        super("MOCASIN", marca, modelo, talle, color, precio);
+    }
+}
+
+class FactoryCalzado {    
+    crearCalzado(tipo, marca, modelo, talle, color, precio) {
+        switch (tipo) {
+            case (tipo.toUpperCase() === "CASUAL"):
+                return new CalzadoCasual(marca, modelo, talle, color, precio);
+            case (tipo.toUpperCase() === "DEPORTIVO"):
+                return new CalzadoDeportivo(marca, modelo, talle, color, precio);
+            case (tipo.toUpperCase() === "MOCASIN"):
+                return new CalzadoMocasin(marca, modelo, talle, color, precio);
+            default:
+                console.log('Error');
+        }        
+    }
+}
+
+let infoCalzado = (calzado) => {
+
+    for (let propiedad in calzado) {
+        console.log(`${propiedad}: ${calzado[propiedad]}`);
+    }
+
+} */
+
 
 ////////////////////////////////////////////
 
@@ -53,9 +94,16 @@ class Stock {
     agregarProducto(prod) {
         if (prod.tipo == this.tipo) {
             this.productos.push(prod);
-            console.log(`El producto ${prod.marca} ${prod.modelo} fue agregado al stock de tipo ${this.tipo}`);
+            console.log(`El calzado ${prod.marca} ${prod.modelo} fue agregado al stock de tipo ${this.tipo}`);
         } else {
-            console.log(`El producto ${prod.marca} ${prod.modelo} no fue agregado al stock porque no es un par de ${this.tipo}`);
+            console.log(`El calzado ${prod.marca} ${prod.modelo} no fue agregado al stock porque no es un par de ${this.tipo}`);
+        }
+    }
+
+    agregarMismoProductoEnCantidad(calzado, cantidad) {
+        for (let i = 0; i < cantidad; i++) {
+            let conIDMod = calzado.setID(calzado.id + 1);
+            this.agregarProducto(conIDMod);
         }
     }
 }
@@ -270,9 +318,9 @@ ${this.generadorDeListado(gestorStock.coloresEn_(listaProductosTalle))}`).toUppe
         }
     }
 
-    mostrarPrecioDe_(producto) {
-        const precio = producto.precio;
-        alert(`Estás por comprar las BOEDO ${producto.modelo} de tipo ${producto.tipo} en color ${producto.color} talle ${producto.talle}!
+    mostrarPrecioDe_(calzado) {
+        const precio = calzado.precio;
+        alert(`Estás por comprar las BOEDO ${calzado.modelo} de tipo ${calzado.tipo} en color ${calzado.color} talle ${calzado.talle}!
 • PRECIO: $${precio}
 
 El precio final del calzado + IVA del 21% es: $${this.precioFinalConIVA(precio, 21)}`); //en este caso el iva es de 21
@@ -280,7 +328,7 @@ El precio final del calzado + IVA del 21% es: $${this.precioFinalConIVA(precio, 
     }
 
     ivaDel(porcentaje) {
-        return 1 + (porcentaje / 100); //calculo el valor a multiplicar con el precio del producto
+        return 1 + (porcentaje / 100); //calculo el valor a multiplicar con el precio del calzado
     }
 
     precioFinalConIVA(precioProducto, porcentaje) {
@@ -293,39 +341,42 @@ El precio final del calzado + IVA del 21% es: $${this.precioFinalConIVA(precio, 
 /////////////////////////////////////////////////////////////////////////////////
 
 // SETUP
+/* const factory = new FactoryCalzado();
 const stockCasuales = new Stock("Casuales");
 const stockDeportivas = new Stock("Deportivas");
 const stockMocasines = new Stock("Mocasines");
 const gestorStock = new GestorStock();
 const gestorCompra = new GestorCompra();
 
-const zapasBoedo39 = new Producto("Boedo", "Otoño", "Casuales", 39, "Negro", 5500);
-const zapasBoedo40 = new Producto("Boedo", "Shiva", "Casuales", 40, "Marron", 5500);
-const zapasBoedo41 = new Producto("Boedo", "Kelyx", "Casuales", 41, "Blanco", 5500);
-const deportivas38 = new Producto("Boedo", "Redragon", "Deportivas", 41, "Blanco", 8700);
-const deportivas40 = new Producto("Boedo", "Verano", "Deportivas", 41, "Negro", 8700);
-const deportivas41 = new Producto("Boedo", "Running", "Deportivas", 41, "Azul", 8700);
-const mocasines40 = new Producto("Boedo", "Glaciar", "Mocasines", 41, "Blanco", 11500);
-const mocasines43 = new Producto("Boedo", "Chili Peppers", "Mocasines", 41, "Marron", 11500);
-const mocasines44 = new Producto("Boedo", "Apa Beer", "Mocasines", 41, "Negro", 11500);
+const zapasBoedo39 = factory.crearCalzado("Casual", "Boedo", "Otoño", 39, "Negro", 5500);
+const zapasBoedo40 = factory.crearCalzado("Casual", "Boedo", "Shiva", 40, "Marron", 5500);
+const zapasBoedo41 = factory.crearCalzado("Casual", "Boedo", "Kelyx", 41, "Blanco", 5500);
+const deportivas38 = factory.crearCalzado("Deportivo", "Boedo", "Redragon", 41, "Blanco", 8700);
+const deportivas40 = factory.crearCalzado("Deportivo", "Boedo", "Verano", 41, "Negro", 8700);
+const deportivas41 = factory.crearCalzado("Deportivo", "Boedo", "Running", 41, "Azul", 8700);
+const mocasines40 = factory.crearCalzado("Mocasin", "Boedo", "Glaciar", 41, "Blanco", 11500);
+const mocasines43 = factory.crearCalzado("Mocasin", "Boedo", "Chili Peppers", 41, "Marron", 11500);
+const mocasines44 = factory.crearCalzado("Mocasin", "Boedo", "Apa Beer", 41, "Negro", 11500);
 
-stockCasuales.agregarProducto(zapasBoedo39);
-stockCasuales.agregarProducto(zapasBoedo40);
-stockCasuales.agregarProducto(zapasBoedo41);
-stockDeportivas.agregarProducto(deportivas38);
-stockDeportivas.agregarProducto(deportivas40);
-stockDeportivas.agregarProducto(deportivas41);
-stockMocasines.agregarProducto(mocasines40);
-stockMocasines.agregarProducto(mocasines43);
-stockMocasines.agregarProducto(mocasines44);
+stockCasuales.agregarMismoProductoEnCantidad(zapasBoedo39, 5);
+stockCasuales.agregarMismoProductoEnCantidad(zapasBoedo40, 8);
+stockCasuales.agregarMismoProductoEnCantidad(zapasBoedo41, 3);
+stockDeportivas.agregarMismoProductoEnCantidad(deportivas38, 2);
+stockDeportivas.agregarMismoProductoEnCantidad(deportivas40, 5);
+stockDeportivas.agregarMismoProductoEnCantidad(deportivas41, 6);
+stockMocasines.agregarMismoProductoEnCantidad(mocasines40, 4);
+stockMocasines.agregarMismoProductoEnCantidad(mocasines43, 2);
+stockMocasines.agregarMismoProductoEnCantidad(mocasines44, 2);
 
 gestorStock.agregarStock(stockCasuales);
 gestorStock.agregarStock(stockDeportivas);
-gestorStock.agregarStock(stockMocasines);
+gestorStock.agregarStock(stockMocasines); */
+
+
 
 /////////////////////////////////////////////
 
-let precioCasuales = gestorStock.precioDeModelo_En_("OTOÑO", stockCasuales.productos);
+/* let precioCasuales = gestorStock.precioDeModelo_En_("OTOÑO", stockCasuales.productos);
 
 let divPrecio = document.getElementById("precio");
 divPrecio.innerText = `$${precioCasuales}`;
@@ -333,4 +384,9 @@ divPrecio.innerText = `$${precioCasuales}`;
 let botonComprar = document.getElementById("btnCompra");
 botonComprar.onclick = () => {
     gestorCompra.iniciarCompra();
-}
+} */
+
+
+
+///////////////////////////////////////////
+

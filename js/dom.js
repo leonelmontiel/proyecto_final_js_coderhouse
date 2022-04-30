@@ -29,29 +29,15 @@ repetirCadaSegundo();
 
 //////////////////////////////
 
-// CÓDIGO PARA DESAFÍO: INCORPORAR EVENTOS
+//USO LOCALSTORAGE Y JSON para actualizar la base de datos de Formularios
 
-class Formulario {
-    constructor(nombrePersona, asunto, email, mensaje) {
-        this.nombre = nombrePersona;
-        this.asunto = asunto;
-        this.email = email;
-        this.mensaje = mensaje;
-    }
-}
+////////////// ESTE BLOQUE DE CÓDIGO LO TENÍA EN DATABASE PERO SI NO LO TENGO PEGADO ACÁ ME TIRA EL ERROR: ////////////
+//////////////////////////////// cannot access 'Formulario' before initialization /////////////////////////////////
+///////////////////////////////// INTENTÉ USAR EXPORT E IMPORT PERO NO HAY CASO ///////////////////////////////////////
 
-//USAR LOCALSTORAGE Y JSON
-let baseDeDatosForm = []; //lista de formularios ingresados
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function almacenarForm(nombre, correo, asunto, mensaje) {
-    const newForm = new Formulario(nombre, asunto, correo, mensaje);
-    baseDeDatosForm.push(newForm);
-    //aplicando localStorage y JSON
-    localStorage.setItem(`Formularios`, JSON.stringify(baseDeDatosForm));
-}
-
-
-let formulario = document.getElementById("form");
+var formulario = document.getElementById("form");
 formulario.addEventListener("submit", validarFormulario);
 
 function validarFormulario(e) {
@@ -61,15 +47,19 @@ function validarFormulario(e) {
     let correo = form.children[1].children[0].value;
     let asunto = form.children[2].children[0].value;
     let mensaje = form.children[3].children[1].value;
-    //Cada vez que se envíe un formulario se va a almacenar en la base de datos
-    almacenarForm(nombre, correo, asunto, mensaje);
+    //Cada vez que se envíe un formulario se va a almacenar en el localStorage
+    almacenarForm(nombre, correo, asunto, mensaje); //en archivo database.js
+    mostrarFormIngresado(nombre, correo, asunto, mensaje);
+    console.log(`CANTIDAD DE FORMULARIOS EN BASE DE DATOS: ${cantFormularios()}`);//en archivo database.js
+    succesAlert(`Formulario cargado con éxito!`, `Muchas gracias ${nombre}, en breve nos contactaremos con vos!`, 5000);
+}
+
+function mostrarFormIngresado(nombre, correo, asunto, mensaje) {
     console.log(`Datos del formulario ingresado:
     Nombre: ${nombre}
     Correo: ${correo}
     Asunto: ${asunto}
     Mensaje: ${mensaje}`);
-    console.log(`CANTIDAD DE FORMULARIOS EN BASE DE DATOS: ${baseDeDatosForm.length}`);
-    alert(`Muchas gracias ${nombre}, en breve nos contactaremos con vos!`)
 }
 
 // REEMPLAZAR IMAGEN PERFIL POR BOTÓN "INGRESAR" QUE LANCE UN MODAL
