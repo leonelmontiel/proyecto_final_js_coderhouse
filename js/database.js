@@ -16,9 +16,11 @@ class Formulario {
 }
 
 function crearBaseFormSiNoHay() {
-    if (localStorage.getItem(`Formularios`) == null) {
-        localStorage.setItem(`Formularios`, JSON.stringify([]));
-    }
+    /* ANTES:
+        if (localStorage.getItem(`Formularios`)) {
+            localStorage.setItem(`Formularios`, JSON.stringify([]));
+        } */
+    !localStorage.getItem(`Formularios`) && localStorage.setItem(`Formularios`, JSON.stringify([]));
 }
 
 const cantFormularios = () => {
@@ -92,11 +94,14 @@ class Stock {
     }
 
     agregarProducto(prod) {
-        if (prod.tipo == this.tipo) {
+        // desestructurando el objeto prod
+        let {marca, modelo, tipo} = prod;
+        if (tipo === this.tipo) {
+            // no puedo desestructurar en el parámetro porque necesito todo el objeto completo para pushear en la lista productos
             this.productos.push(prod);
-            console.log(`El calzado ${prod.marca} ${prod.modelo} fue agregado al stock de tipo ${this.tipo}`);
+            console.log(`El calzado ${marca} ${modelo} fue agregado al stock de tipo ${this.tipo}`);
         } else {
-            console.log(`El calzado ${prod.marca} ${prod.modelo} no fue agregado al stock porque no es un par de ${this.tipo}`);
+            console.log(`El calzado ${marca} ${modelo} no fue agregado al stock porque no es un par de ${this.tipo}`);
         }
     }
 
@@ -135,6 +140,7 @@ class GestorStock {
 
     modelosEn_(listaProductos) {
         return listaProductos.map((prod) => prod.modelo);
+        // funciona si hago = listaProductos.map(({modelo}) => modelo);  ??
     }
 
     tallesEn_(listaProductos) {
@@ -153,6 +159,7 @@ class GestorStock {
 
     hayModelo_En_(modelo, listaProductos) {
         return this.algunoConModelo_En_(modelo, listaProductos) != undefined;
+        // funcionaría de la misma manera si solo hago = return !this.algunoConModelo_En_(modelo, listaProductos);  ??
     }
 
     hayTalle_En_(talle, listaProductos) {
