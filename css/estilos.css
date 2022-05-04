@@ -4,7 +4,6 @@
 
 a {
     text-decoration: none;
-    color: initial;
 }
 
 .portada .col-12, .row, .container-fluid {
@@ -70,10 +69,6 @@ header .item {
 }
 
 /* ----- MAIN ----- */
-
-main {
-    padding: 10vh !important;
-}
 
 .card {
     width: 250px;

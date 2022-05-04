@@ -60,22 +60,21 @@ const mostrarColeccion = () => {
     const nuevosIngresos = gestorStock.getNuevosIngresos();
 
     nuevosIngresos.forEach(item => {
-        let card = document.createElement("div");
+        let card = document.createElement("article");
+        card.className = "card col-12 col-lg-3";
         card.innerHTML = 
-        `        
-        <article class="card col-12 col-lg-3">
-            <img src="./images/productos/${item.tipo}/${item.modelo}1.jpg" height="250px" class="card-img-top">
-            <div class="card-body">
-                <div class="col-12">
-                    <button type="button" class="btn btn-warning btn-lang fw-bold lh-1 p-1 h-25 mb-2" id="tipo">${item.tipo}</button>
-                </div>
-                <h6 class="card-title">${item.marca} ${item.modelo}</h6>
-                <div class="col-12 fw-bold">$${item.precio}</div>
-                <a href="./articulo.html">
-                <button type="button" class="btn btn-success mt-2">COMPRAR</button>
-                </a>
+        `
+        <img src="./images/productos/${item.tipo}/${item.modelo}1.jpg" height="250px" class="card-img-top">
+        <div class="card-body">
+            <div class="col-12">
+                <button type="button" class="btn btn-warning btn-lang fw-bold lh-1 p-1 h-25 mb-2" id="tipo">${item.tipo}</button>
             </div>
-        </article>        
+            <h6 class="card-title">${item.marca} ${item.modelo}</h6>
+            <div class="col-12 fw-bold">$${item.precio}</div>
+            <a href="./articulo.html">
+            <button type="button" class="btn btn-success mt-2">COMPRAR</button>
+            </a>
+        </div>        
         `    
         document.getElementById('coleccion-item').appendChild(card);
     })

@@ -79,7 +79,8 @@ class GestorStock {
 
     agregarStock(stock) {
         this.stocks.push(stock);
-    }
+        localStorage.setItem(`Stocks`, JSON.stringify(this));
+    }    
 
     // DEVUELVEN UNA LISTA
 
@@ -143,7 +144,9 @@ class GestorStock {
 
     getNuevosIngresos() {
         let deCadaTipo = [];
-        this.stocks.forEach(stock => {
+        let localStocks = JSON.parse(localStorage.getItem("Stocks"));
+        let {stocks} = localStocks;
+        stocks.forEach(stock => {
             let {productos} = stock;
             deCadaTipo.push(productos[0]);
         });
@@ -229,7 +232,12 @@ class GestorCompra {
 ////////////////////////////  SETUP Y FLUJO DE USUARIO //////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 
+/* function crearStocksSiNoHay() {
+    !localStorage.getItem(`Stocks`) && localStorage.setItem(`Stocks`, JSON.stringify([]));
+} */
+
 // SETUP
+
 const stockCasuales = new Stock("Casual");
 const stockDeportivas = new Stock("Deportivo");
 const stockMocasines = new Stock("Mocasin");
