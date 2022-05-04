@@ -27,7 +27,7 @@ const cantFormularios = () => {
     return JSON.parse(localStorage.getItem(`Formularios`)).length;
 }
 
-/* class Calzado {
+class Calzado {
     constructor(tipo, marca, modelo, talle, color, precio) {
         this.id = 0;
         this.tipo = tipo.toUpperCase();
@@ -38,53 +38,10 @@ const cantFormularios = () => {
         this.precio = precio;
     }
 
-    setID(id) {
-        this.id = id;
-    }
+        setID(id) {
+            this.id = id;
+        }
 }
-
-class CalzadoCasual extends Calzado {
-    constructor(marca, modelo, talle, color, precio) {
-        super("CASUAL", marca, modelo, talle, color, precio);
-    }
-}
-
-class CalzadoDeportivo extends Calzado {
-    constructor(marca, modelo, talle, color, precio) {
-        super("DEPORTIVO", marca, modelo, talle, color, precio);
-    }
-}
-
-class CalzadoMocasin extends Calzado {
-    constructor(marca, modelo, talle, color, precio) {
-        super("MOCASIN", marca, modelo, talle, color, precio);
-    }
-}
-
-class FactoryCalzado {    
-    crearCalzado(tipo, marca, modelo, talle, color, precio) {
-        switch (tipo) {
-            case (tipo.toUpperCase() === "CASUAL"):
-                return new CalzadoCasual(marca, modelo, talle, color, precio);
-            case (tipo.toUpperCase() === "DEPORTIVO"):
-                return new CalzadoDeportivo(marca, modelo, talle, color, precio);
-            case (tipo.toUpperCase() === "MOCASIN"):
-                return new CalzadoMocasin(marca, modelo, talle, color, precio);
-            default:
-                console.log('Error');
-        }        
-    }
-}
-
-let infoCalzado = (calzado) => {
-
-    for (let propiedad in calzado) {
-        console.log(`${propiedad}: ${calzado[propiedad]}`);
-    }
-
-} */
-
-
 ////////////////////////////////////////////
 
 class Stock {
@@ -95,7 +52,7 @@ class Stock {
 
     agregarProducto(prod) {
         // desestructurando el objeto prod
-        let {marca, modelo, tipo} = prod;
+        let {tipo, marca, modelo} = prod;
         if (tipo === this.tipo) {
             // no puedo desestructurar en el parámetro porque necesito todo el objeto completo para pushear en la lista productos
             this.productos.push(prod);
@@ -107,8 +64,8 @@ class Stock {
 
     agregarMismoProductoEnCantidad(calzado, cantidad) {
         for (let i = 0; i < cantidad; i++) {
-            let conIDMod = calzado.setID(calzado.id + 1);
-            this.agregarProducto(conIDMod);
+            //let conIDMod = calzado.setID(calzado.id + 1);
+            this.agregarProducto(calzado);
         }
     }
 }
@@ -117,7 +74,7 @@ class Stock {
 
 class GestorStock {
     constructor() {
-        this.stocks = [];
+        this.stocks = []; // lista de de stocks (lista de listas)
     }
 
     agregarStock(stock) {
@@ -184,6 +141,16 @@ class GestorStock {
         return listaProductos.filter(prod => prod.color == color);
     }
 
+    getNuevosIngresos() {
+        let deCadaTipo = [];
+        this.stocks.forEach(stock => {
+            let {productos} = stock;
+            deCadaTipo.push(productos[0]);
+        });
+        
+        return deCadaTipo;
+    }
+
     // DEVUELVEN UN OBJETO
 
     stockDeTipo_(tipo) {
@@ -218,7 +185,7 @@ class GestorCompra {
         this.seleccionarCalzado();
     }
 
-    generadorDeListado(listaTexto) {
+    /* generadorDeListado(listaTexto) {
         let stringResultante = ``;
         listaTexto.forEach(texto => {
             stringResultante += `• ${texto} \n`
@@ -227,8 +194,9 @@ class GestorCompra {
         /* devuelve:
         • String
         • String
-        • ... */
-    }
+        • ... 
+    } 
+    */
 
     tipoDeProductos_(listaProductos) {
         return listaProductos[0].tipo;
@@ -246,93 +214,7 @@ class GestorCompra {
         return listaProductos[0];
     }
 
-    ////////
-
-    seleccionarCalzado() {
-        let tipo = prompt(`Por favor, ingresá el tipo de calzado que deseas comprar:
-${this.generadorDeListado(gestorStock.tiposStock())}`).toUpperCase();
-
-        this.consultarTipo_(tipo);
-    }
-
-    consultarTipo_(tipo) {
-        let listaProductosTipo = [];
-        if (gestorStock.hayCalzadoTipo_(tipo)) {
-            alert(`Elegiste el tipo ${tipo}!`);
-            listaProductosTipo = gestorStock.productosTipo_(tipo);
-            console.log(listaProductosTipo);
-            this.seleccionarModeloEn_(listaProductosTipo);
-        } else {
-            alert(`Por el momento no tenemos el tipo ${tipo} en Stock, por favor, elegí otro`);
-            this.seleccionarCalzado();
-        }
-    }
-
-    seleccionarModeloEn_(listaProductosTipo) {
-        let modelo = prompt(`Por favor, ingresá el modelo del calzado ${this.tipoDeProductos_(listaProductosTipo)} que deseas comprar:
-${this.generadorDeListado(gestorStock.modelosEn_(listaProductosTipo))}`).toUpperCase();
-
-        this.consultarModelo_En_(modelo, listaProductosTipo);
-    }
-
-    consultarModelo_En_(modelo, listaProductosTipo) {
-        let listaProductosModelo = [];
-        if (gestorStock.hayModelo_En_(modelo, listaProductosTipo)) {
-            alert(`Elegiste el modelo ${modelo}!`);
-            listaProductosModelo = gestorStock.productosModelo_En_(modelo, listaProductosTipo);
-            this.seleccionarTalleEn_(listaProductosModelo);
-        } else {
-            alert(`Por el momento no tenemos el modelo ${modelo} en Stock, por favor, elegí otro`);
-            this.seleccionarModeloEn_(listaProductosTipo);
-        }
-    }
-
-    seleccionarTalleEn_(listaProductosModelo) {
-        let talle = parseInt(prompt(`Por favor, ingresá el talle del calzado BOEDO ${this.modeloDeProductos_(listaProductosModelo)} ${this.tipoDeProductos_(listaProductosModelo)} que deseas comprar:
-${this.generadorDeListado(gestorStock.tallesEn_(listaProductosModelo))}`));
-
-        this.consultarTalle_En_(talle, listaProductosModelo);
-    }
-
-    consultarTalle_En_(talle, listaProductosModelo) {
-        let listaProductosTalle = [];
-        if (gestorStock.hayTalle_En_(talle, listaProductosModelo)) {
-            alert(`Elegiste el talle ${talle}!`);
-            listaProductosTalle = gestorStock.productosTalle_En_(talle, listaProductosModelo);
-            this.seleccionarColorEn_(listaProductosTalle);
-        } else {
-            alert(`Por el momento no tenemos el talle ${talle} en Stock, por favor, elegí otro`);
-            this.seleccionarTalleEn_(listaProductosModelo);
-        }
-    }
-
-    seleccionarColorEn_(listaProductosTalle) {
-        let color = prompt(`Elegí el color para las BOEDO ${this.modeloDeProductos_(listaProductosTalle)} ${this.talleDeProductos_(listaProductosTalle)} ${this.tipoDeProductos_(listaProductosTalle)}:
-${this.generadorDeListado(gestorStock.coloresEn_(listaProductosTalle))}`).toUpperCase();
-
-        this.consultarColor_En_(color, listaProductosTalle);
-    }
-
-    consultarColor_En_(color, listaProductosTalle) {
-        let listaProductosColor = [];
-        if (gestorStock.hayColor_En_(color, listaProductosTalle)) {
-            alert(`Elegiste el color ${color}!`);
-            listaProductosColor = gestorStock.productosColor_En_(color, listaProductosTalle);
-            this.mostrarPrecioDe_(this.productoFinalEn_(listaProductosColor));
-        } else {
-            alert(`Por el momento no tenemos el color ${color} en Stock, por favor, elegí otro`);
-            this.seleccionarColorEn_(listaProductosTalle);
-        }
-    }
-
-    mostrarPrecioDe_(calzado) {
-        const precio = calzado.precio;
-        alert(`Estás por comprar las BOEDO ${calzado.modelo} de tipo ${calzado.tipo} en color ${calzado.color} talle ${calzado.talle}!
-• PRECIO: $${precio}
-
-El precio final del calzado + IVA del 21% es: $${this.precioFinalConIVA(precio, 21)}`); //en este caso el iva es de 21
-        //Acá más adelante jugaré con las propiedades de los objetos para tomar la info que necesite
-    }
+    ////////    
 
     ivaDel(porcentaje) {
         return 1 + (porcentaje / 100); //calculo el valor a multiplicar con el precio del calzado
@@ -348,36 +230,43 @@ El precio final del calzado + IVA del 21% es: $${this.precioFinalConIVA(precio, 
 /////////////////////////////////////////////////////////////////////////////////
 
 // SETUP
-/* const factory = new FactoryCalzado();
-const stockCasuales = new Stock("Casuales");
-const stockDeportivas = new Stock("Deportivas");
-const stockMocasines = new Stock("Mocasines");
+const stockCasuales = new Stock("Casual");
+const stockDeportivas = new Stock("Deportivo");
+const stockMocasines = new Stock("Mocasin");
+const stockNauticas = new Stock("Nautico");
 const gestorStock = new GestorStock();
 const gestorCompra = new GestorCompra();
 
-const zapasBoedo39 = factory.crearCalzado("Casual", "Boedo", "Otoño", 39, "Negro", 5500);
-const zapasBoedo40 = factory.crearCalzado("Casual", "Boedo", "Shiva", 40, "Marron", 5500);
-const zapasBoedo41 = factory.crearCalzado("Casual", "Boedo", "Kelyx", 41, "Blanco", 5500);
-const deportivas38 = factory.crearCalzado("Deportivo", "Boedo", "Redragon", 41, "Blanco", 8700);
-const deportivas40 = factory.crearCalzado("Deportivo", "Boedo", "Verano", 41, "Negro", 8700);
-const deportivas41 = factory.crearCalzado("Deportivo", "Boedo", "Running", 41, "Azul", 8700);
-const mocasines40 = factory.crearCalzado("Mocasin", "Boedo", "Glaciar", 41, "Blanco", 11500);
-const mocasines43 = factory.crearCalzado("Mocasin", "Boedo", "Chili Peppers", 41, "Marron", 11500);
-const mocasines44 = factory.crearCalzado("Mocasin", "Boedo", "Apa Beer", 41, "Negro", 11500);
+const casuales39 = new Calzado("Casual", "Boedo", "Otoño", 39, "Negro", 5500); //tipo, marca, modelo, talle, color, precio
+const casuales40 = new Calzado("Casual", "Boedo", "Shiva", 40, "Marron", 5500);
+const casuales41 = new Calzado("Casual", "Boedo", "Kelyx", 41, "Blanco", 5500);
+const deportivas38 = new Calzado("Deportivo", "Boedo", "Redragon", 41, "Blanco", 8700);
+const deportivas40 = new Calzado("Deportivo", "Boedo", "Verano", 41, "Negro", 8700);
+const deportivas41 = new Calzado("Deportivo", "Boedo", "Running", 41, "Azul", 8700);
+const mocasines40 = new Calzado("Mocasin", "Boedo", "Glaciar", 41, "Blanco", 11500);
+const mocasines43 = new Calzado("Mocasin", "Boedo", "Chili Peppers", 41, "Marron", 11500);
+const mocasines44 = new Calzado("Mocasin", "Boedo", "Apa Beer", 41, "Negro", 11500);
+const nauticas38 = new Calzado("Nautico", "Boedo", "Shiva", 41, "Blanco", 6200);
+const nauticas40 = new Calzado("Nautico", "Boedo", "Chili Peppers", 41, "Marron", 6200);
+const nauticas43 = new Calzado("Nautico", "Boedo", "Apa Beer", 41, "Negro", 6200);
 
-stockCasuales.agregarMismoProductoEnCantidad(zapasBoedo39, 5);
-stockCasuales.agregarMismoProductoEnCantidad(zapasBoedo40, 8);
-stockCasuales.agregarMismoProductoEnCantidad(zapasBoedo41, 3);
+stockCasuales.agregarMismoProductoEnCantidad(casuales39, 5);
+stockCasuales.agregarMismoProductoEnCantidad(casuales40, 8);
+stockCasuales.agregarMismoProductoEnCantidad(casuales41, 3);
 stockDeportivas.agregarMismoProductoEnCantidad(deportivas38, 2);
 stockDeportivas.agregarMismoProductoEnCantidad(deportivas40, 5);
 stockDeportivas.agregarMismoProductoEnCantidad(deportivas41, 6);
 stockMocasines.agregarMismoProductoEnCantidad(mocasines40, 4);
 stockMocasines.agregarMismoProductoEnCantidad(mocasines43, 2);
 stockMocasines.agregarMismoProductoEnCantidad(mocasines44, 2);
+stockNauticas.agregarMismoProductoEnCantidad(nauticas38, 4);
+stockNauticas.agregarMismoProductoEnCantidad(nauticas40, 6);
+stockNauticas.agregarMismoProductoEnCantidad(nauticas43, 2);
 
 gestorStock.agregarStock(stockCasuales);
 gestorStock.agregarStock(stockDeportivas);
-gestorStock.agregarStock(stockMocasines); */
+gestorStock.agregarStock(stockMocasines);
+gestorStock.agregarStock(stockNauticas);
 
 
 
