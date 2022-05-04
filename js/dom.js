@@ -62,19 +62,20 @@ const mostrarColeccion = () => {
     nuevosIngresos.forEach(item => {
         let card = document.createElement("div");
         card.innerHTML = 
-        `
-        <a href="./articulo.html">
-            <article class="card col-12 col-lg-3">
-                <img src="./images/productos/${item.tipo}/${item.modelo}1.jpg" height="250px" class="card-img-top">
-                <div class="card-body">
-                    <div class="col-12">
-                        <button type="button" class="btn btn-warning btn-lang fw-bold lh-1 p-1 h-25 mb-2" id="tipo">${item.tipo}</button>
-                    </div>
-                    <h6 class="card-title">${item.marca} ${item.modelo}</h6>
-                    <div class="col-12 fw-bold">$${item.precio}</div>
+        `        
+        <article class="card col-12 col-lg-3">
+            <img src="./images/productos/${item.tipo}/${item.modelo}1.jpg" height="250px" class="card-img-top">
+            <div class="card-body">
+                <div class="col-12">
+                    <button type="button" class="btn btn-warning btn-lang fw-bold lh-1 p-1 h-25 mb-2" id="tipo">${item.tipo}</button>
                 </div>
-            </article>
-        </a>
+                <h6 class="card-title">${item.marca} ${item.modelo}</h6>
+                <div class="col-12 fw-bold">$${item.precio}</div>
+                <a href="./articulo.html">
+                <button type="button" class="btn btn-success mt-2">COMPRAR</button>
+                </a>
+            </div>
+        </article>        
         `    
         document.getElementById('coleccion-item').appendChild(card);
     })
