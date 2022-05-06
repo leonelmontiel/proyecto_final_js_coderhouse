@@ -28,8 +28,8 @@ const cantFormularios = () => {
 }
 
 class Calzado {
-    constructor(tipo, marca, modelo, talle, color, precio) {
-        this.id = 0;
+    constructor(id, tipo, marca, modelo, talle, color, precio) {
+        this.id = id;
         this.tipo = tipo.toUpperCase();
         this.marca = marca.toUpperCase();
         this.modelo = modelo.toUpperCase();
@@ -37,11 +37,26 @@ class Calzado {
         this.color = color.toUpperCase();
         this.precio = precio;
     }
-
-        setID(id) {
-            this.id = id;
-        }
 }
+
+// objeto con patrón Singleton para que solo exista una instancia de factoryCalzado, la cual gestiona y actualiza los ID
+const factoryCalzado = {
+
+    _lastID: 0, // propiedad que recuerda la última id
+    get lastID() {
+        return this._lastID;
+    },
+    set lastID(value) {
+        this._lastID = value;
+    },
+    
+    crear: function(tipo, marca, modelo, talle, color, precio) {
+        let id = this.lastID + 1;
+        this.lastID = id;
+        return new Calzado(id, tipo, marca, modelo, talle, color, precio);
+    }
+}
+
 ////////////////////////////////////////////
 
 class Stock {
@@ -245,20 +260,33 @@ const stockNauticas = new Stock("Nautico");
 const gestorStock = new GestorStock();
 const gestorCompra = new GestorCompra();
 
-const casuales39 = new Calzado("Casual", "Boedo", "Otoño", 39, "Negro", 5500); //tipo, marca, modelo, talle, color, precio
-const casuales40 = new Calzado("Casual", "Boedo", "Shiva", 40, "Marron", 5500);
-const casuales41 = new Calzado("Casual", "Boedo", "Kelyx", 41, "Blanco", 5500);
-const deportivas38 = new Calzado("Deportivo", "Boedo", "Redragon", 41, "Blanco", 8700);
-const deportivas40 = new Calzado("Deportivo", "Boedo", "Verano", 41, "Negro", 8700);
-const deportivas41 = new Calzado("Deportivo", "Boedo", "Running", 41, "Azul", 8700);
-const mocasines40 = new Calzado("Mocasin", "Boedo", "Glaciar", 41, "Blanco", 11500);
-const mocasines43 = new Calzado("Mocasin", "Boedo", "Chili Peppers", 41, "Marron", 11500);
-const mocasines44 = new Calzado("Mocasin", "Boedo", "Apa Beer", 41, "Negro", 11500);
-const nauticas38 = new Calzado("Nautico", "Boedo", "Shiva", 41, "Blanco", 6200);
-const nauticas40 = new Calzado("Nautico", "Boedo", "Chili Peppers", 41, "Marron", 6200);
-const nauticas43 = new Calzado("Nautico", "Boedo", "Apa Beer", 41, "Negro", 6200);
+const casuales39 = factoryCalzado.crear("Casual", "Boedo", "Otoño", 39, "Negro", 5500); //tipo, marca, modelo, talle, color, precio
+const casuales40 = factoryCalzado.crear("Casual", "Boedo", "Shiva", 40, "Marron", 5500);
+const casuales41 = factoryCalzado.crear("Casual", "Boedo", "Kelyx", 41, "Blanco", 5500);
+const deportivas38 = factoryCalzado.crear("Deportivo", "Boedo", "Redragon", 41, "Blanco", 8700);
+const deportivas40 = factoryCalzado.crear("Deportivo", "Boedo", "Verano", 41, "Negro", 8700);
+const deportivas41 = factoryCalzado.crear("Deportivo", "Boedo", "Running", 41, "Azul", 8700);
+const mocasines40 = factoryCalzado.crear("Mocasin", "Boedo", "Glaciar", 41, "Blanco", 11500);
+const mocasines43 = factoryCalzado.crear("Mocasin", "Boedo", "Chili Peppers", 41, "Marron", 11500);
+const mocasines44 = factoryCalzado.crear("Mocasin", "Boedo", "Apa Beer", 41, "Negro", 11500);
+const nauticas38 = factoryCalzado.crear("Nautico", "Boedo", "Shiva", 41, "Blanco", 6200);
+const nauticas40 = factoryCalzado.crear("Nautico", "Boedo", "Chili Peppers", 41, "Marron", 6200);
+const nauticas43 = factoryCalzado.crear("Nautico", "Boedo", "Apa Beer", 41, "Negro", 6200);
 
-stockCasuales.agregarMismoProductoEnCantidad(casuales39, 5);
+stockCasuales.agregarProducto(casuales39);
+stockCasuales.agregarProducto(casuales40);
+stockCasuales.agregarProducto(casuales41);
+stockDeportivas.agregarProducto(deportivas38);
+stockDeportivas.agregarProducto(deportivas40);
+stockDeportivas.agregarProducto(deportivas41);
+stockMocasines.agregarProducto(mocasines40);
+stockMocasines.agregarProducto(mocasines43);
+stockMocasines.agregarProducto(mocasines44);
+stockNauticas.agregarProducto(nauticas38);
+stockNauticas.agregarProducto(nauticas40);
+stockNauticas.agregarProducto(nauticas43);
+
+/* stockCasuales.agregarMismoProductoEnCantidad(casuales39, 5);
 stockCasuales.agregarMismoProductoEnCantidad(casuales40, 8);
 stockCasuales.agregarMismoProductoEnCantidad(casuales41, 3);
 stockDeportivas.agregarMismoProductoEnCantidad(deportivas38, 2);
@@ -269,7 +297,7 @@ stockMocasines.agregarMismoProductoEnCantidad(mocasines43, 2);
 stockMocasines.agregarMismoProductoEnCantidad(mocasines44, 2);
 stockNauticas.agregarMismoProductoEnCantidad(nauticas38, 4);
 stockNauticas.agregarMismoProductoEnCantidad(nauticas40, 6);
-stockNauticas.agregarMismoProductoEnCantidad(nauticas43, 2);
+stockNauticas.agregarMismoProductoEnCantidad(nauticas43, 2); */
 
 gestorStock.agregarStock(stockCasuales);
 gestorStock.agregarStock(stockDeportivas);
