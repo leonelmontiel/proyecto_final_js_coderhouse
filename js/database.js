@@ -16,10 +16,6 @@ class Formulario {
 }
 
 function crearBaseFormSiNoHay() {
-    /* ANTES:
-        if (localStorage.getItem(`Formularios`)) {
-            localStorage.setItem(`Formularios`, JSON.stringify([]));
-        } */
     !localStorage.getItem(`Formularios`) && localStorage.setItem(`Formularios`, JSON.stringify([]));
 }
 
@@ -87,23 +83,35 @@ class Stock {
     }
 
     agregarProductoEnCantidad(listaProductos) {
-        listaProductos.forEach(prod => {
-            this.agregarProducto(prod)
-        })
+        this.productos = this.productos.concat(listaProductos);
+    }
+
+    borrarProductoID(_id) {
+        let index = this.productos.findIndex(prod => prod.id == _id);
+        console.log(index)
+        this.productos.splice(index, 1);
     }
 }
 
 //////////////////////////////////////////////
 
 class GestorStock {
-    constructor() {
-        this.stocks = []; // lista de de stocks (lista de listas)
-    }
 
     agregarStock(stock) {
-        this.stocks.push(stock);
-        localStorage.setItem(`Stocks`, JSON.stringify(this));
-    }    
+        localStorage.setItem(`Stock${stock.tipo}`, JSON.stringify(stock));
+        this.crearAllStocksSiNoHay();
+        let allStocks = JSON.parse(localStorage.getItem(`allStocks`));
+        allStocks.push(stock);
+        localStorage.setItem(`allStocks`, JSON.stringify(allStocks));
+    }
+
+    crearAllStocksSiNoHay() {
+        !localStorage.getItem(`allStocks`) && localStorage.setItem(`allStocks`, JSON.stringify([]));
+    }
+    
+    borrarProductoID(_id) {
+        let productos = JSON.parse(localStorage.getItem(`Stocks`));
+    }
 
     // DEVUELVEN UNA LISTA
 
@@ -167,9 +175,8 @@ class GestorStock {
 
     getNuevosIngresos() {
         let deCadaTipo = [];
-        let localStocks = JSON.parse(localStorage.getItem("Stocks"));
-        let {stocks} = localStocks;
-        stocks.forEach(stock => {
+        let localStocks = JSON.parse(localStorage.getItem("allStocks"));
+        localStocks.forEach(stock => {
             let {productos} = stock;
             deCadaTipo.push(productos[0]);
         });
@@ -281,18 +288,6 @@ const nauticas38 = factoryCalzado.crearEnCantidad("Nautico", "Boedo", "Shiva", 4
 const nauticas40 = factoryCalzado.crearEnCantidad("Nautico", "Boedo", "Chili Peppers", 41, "Marron", 6200, 2);
 const nauticas43 = factoryCalzado.crearEnCantidad("Nautico", "Boedo", "Apa Beer", 41, "Negro", 6200, 2);
 
-/* stockCasuales.agregarProducto(casuales39);
-stockCasuales.agregarProducto(casuales40);
-stockCasuales.agregarProducto(casuales41);
-stockDeportivas.agregarProducto(deportivas38);
-stockDeportivas.agregarProducto(deportivas40);
-stockDeportivas.agregarProducto(deportivas41);
-stockMocasines.agregarProducto(mocasines40);
-stockMocasines.agregarProducto(mocasines43);
-stockMocasines.agregarProducto(mocasines44);
-stockNauticas.agregarProducto(nauticas38);
-stockNauticas.agregarProducto(nauticas40);
-stockNauticas.agregarProducto(nauticas43); */
 
 stockCasuales.agregarProductoEnCantidad(casuales39);
 stockCasuales.agregarProductoEnCantidad(casuales40);
@@ -306,10 +301,14 @@ stockMocasines.agregarProductoEnCantidad(mocasines44);
 stockNauticas.agregarProductoEnCantidad(nauticas38);
 stockNauticas.agregarProductoEnCantidad(nauticas40);
 
+//stockCasuales.borrarProductoID(3);
+
 gestorStock.agregarStock(stockCasuales);
 gestorStock.agregarStock(stockDeportivas);
 gestorStock.agregarStock(stockMocasines);
 gestorStock.agregarStock(stockNauticas);
+
+//gestorStock.borrarProductoID(3);
 
 
 
