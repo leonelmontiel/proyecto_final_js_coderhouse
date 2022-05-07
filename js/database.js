@@ -95,117 +95,131 @@ class Stock {
 
 //////////////////////////////////////////////
 
-class GestorStock {
+const gestorStock = {
 
-    agregarStock(stock) {
-        localStorage.setItem(`Stock${stock.tipo}`, JSON.stringify(stock));
-        this.crearAllStocksSiNoHay();
-        let allStocks = JSON.parse(localStorage.getItem(`allStocks`));
-        allStocks.push(stock);
-        localStorage.setItem(`allStocks`, JSON.stringify(allStocks));
-    }
+    initialize: function() {
+        this.crearGestorStocksSiNoHay();
+    },
 
-    crearAllStocksSiNoHay() {
-        !localStorage.getItem(`allStocks`) && localStorage.setItem(`allStocks`, JSON.stringify([]));
-    }
-    
-    borrarProductoID(_id) {
-        let productos = JSON.parse(localStorage.getItem(`Stocks`));
-    }
+    crearGestorStocksSiNoHay: function() {
+        !localStorage.getItem(`GestorStocks`) && localStorage.setItem(`GestorStocks`, JSON.stringify([]));
+    },
+
+    crearStockSiNoHay: function(stock) {
+        let {tipo} = stock;
+        !localStorage.getItem(`Stock${tipo}`) && localStorage.setItem(`Stock${tipo}`, JSON.stringify(stock));
+    },
+
+    agregarStock: function(stock) {
+        let {tipo} = stock;
+        this.crearStockSiNoHay(stock);
+        let localStock = JSON.parse(localStorage.getItem(`Stock${tipo}`))
+        localStorage.setItem(`Stock${tipo}`, JSON.stringify(localStock));
+        /// modularizar
+        if (!this.estaStockEnGestor(stock)) { //tengo que ver si el stockTipo está en la lista del gestor
+            let gestor = JSON.parse(localStorage.getItem(`GestorStocks`));
+            gestor.push(stock);
+            localStorage.setItem(`GestorStocks`, JSON.stringify(gestor));
+        }        
+    },
+
+    estaStockEnGestor: function(stock) {
+        return JSON.parse(localStorage.getItem(`GestorStocks`)).find(element => element.tipo == stock.tipo);
+    },
 
     // DEVUELVEN UNA LISTA
 
-    productosTipo_(tipo) {
+    productosTipo: function(tipo) {
         return this.stockDeTipo_(tipo).productos;
-    }
+    },
 
     // DEVUELVEN UN STRING CON INFORMACIÓN PARTICULAR
 
-    tiposStock() {
+    tiposStock: function() {
         return this.stocks.map(stock => stock.tipo);
-    }
+    },
 
     // DEVUELVEN UNA LISTA TRANSFORMADA PARA UTILIZAR SUS ELEMENTOS EN UN STRING
 
-    modelosEn_(listaProductos) {
+    modelosEn: function(listaProductos) {
         return listaProductos.map((prod) => prod.modelo);
         // funciona si hago = listaProductos.map(({modelo}) => modelo);  ??
-    }
+    },
 
-    tallesEn_(listaProductos) {
+    tallesEn: function(listaProductos) {
         return listaProductos.map((prod) => prod.talle);
-    }
+    },
 
-    coloresEn_(listaProductos) {
+    coloresEn: function(listaProductos) {
         return listaProductos.map((prod) => prod.color);
-    }
+    },
 
     // DEVUELVEN UN VALOR DE VERDAD DADA UNA CONDICIÓN
 
-    hayCalzadoTipo_(tipo) {
+    hayCalzadoTipo: function(tipo) {
         return this.stockDeTipo_(tipo) != undefined;
-    }
+    },
 
-    hayModelo_En_(modelo, listaProductos) {
+    hayModeloEn: function(modelo, listaProductos) {
         return this.algunoConModelo_En_(modelo, listaProductos) != undefined;
         // funcionaría de la misma manera si solo hago = return !this.algunoConModelo_En_(modelo, listaProductos);  ??
-    }
+    },
 
-    hayTalle_En_(talle, listaProductos) {
+    hayTalleEn: function(talle, listaProductos) {
         return this.algunoConTalle_En_(talle, listaProductos) != undefined;
-    }
+    },
 
-    hayColor_En_(color, listaProductos) {
+    hayColorEn: function(color, listaProductos) {
         return this.algunoConColor_En_(color, listaProductos) != undefined;
-    }
+    },
 
     // DEVUELVEN UNA LISTRA FILTRADA CON PRODUCTOS SEGÚN UNA CONDICIÓN DADA
 
-    productosModelo_En_(modelo, listaProductos) {
+    productosModeloEn: function(modelo, listaProductos) {
         return listaProductos.filter(prod => prod.modelo == modelo);
-    }
+    },
 
-    productosTalle_En_(talle, listaProductos) {
+    productosTalleEn: function(talle, listaProductos) {
         return listaProductos.filter(prod => prod.talle == talle);
-    }
+    },
 
-    productosColor_En_(color, listaProductos) {
+    productosColorEn: function(color, listaProductos) {
         return listaProductos.filter(prod => prod.color == color);
-    }
+    },
 
-    getNuevosIngresos() {
+    getNuevosIngresos: function() {
         let deCadaTipo = [];
-        let localStocks = JSON.parse(localStorage.getItem("allStocks"));
+        let localStocks = JSON.parse(localStorage.getItem("GestorStocks"));
         localStocks.forEach(stock => {
             let {productos} = stock;
             deCadaTipo.push(productos[0]);
         });
         
         return deCadaTipo;
-    }
+    },
 
     // DEVUELVEN UN OBJETO
 
-    stockDeTipo_(tipo) {
+    stockDeTipo: function(tipo) {
         return this.stocks.find(stock => stock.tipo == tipo);
         // suponiendo que trabajamos solo con un stock de cada tipo, devuelve el stock del tipo buscado
-    }
+    },
 
-    algunoConModelo_En_(modelo, listaProductos) {
+    algunoConModeloEn: function(modelo, listaProductos) {
         return listaProductos.find(prod => prod.modelo == modelo); 
-    }
+    },
 
-    algunoConTalle_En_(talle, listaProductos) {
+    algunoConTalleEn: function(talle, listaProductos) {
         return listaProductos.find(prod => prod.talle === talle);
-    }
+    },
 
-    algunoConColor_En_(color, listaProductos) {
+    algunoConColorEn: function(color, listaProductos) {
         return listaProductos.find(prod => prod.color === color);
-    }
+    },
 
     //
 
-    precioDeModelo_En_(modeloProducto, listaProductos) {
+    precioDeModeloEn: function(modeloProducto, listaProductos) {
         return listaProductos.find(prod => prod.modelo == modeloProducto).precio;
     }
 }
@@ -262,18 +276,14 @@ class GestorCompra {
 ////////////////////////////  SETUP Y FLUJO DE USUARIO //////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 
-/* function crearStocksSiNoHay() {
-    !localStorage.getItem(`Stocks`) && localStorage.setItem(`Stocks`, JSON.stringify([]));
-} */
-
 // SETUP
 
 const stockCasuales = new Stock("Casual");
 const stockDeportivas = new Stock("Deportivo");
 const stockMocasines = new Stock("Mocasin");
 const stockNauticas = new Stock("Nautico");
-const gestorStock = new GestorStock();
 const gestorCompra = new GestorCompra();
+gestorStock.initialize();
 
 const casuales39 = factoryCalzado.crearEnCantidad("Casual", "Boedo", "Otoño", 39, "Negro", 5500, 4); //tipo, marca, modelo, talle, color, precio
 const casuales40 = factoryCalzado.crearEnCantidad("Casual", "Boedo", "Shiva", 40, "Marron", 5500, 3);
