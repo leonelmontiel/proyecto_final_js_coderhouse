@@ -55,11 +55,15 @@ function mostrarFormIngresado(nombre, correo, asunto, mensaje) {
 }
 
 // REEMPLAZAR IMAGEN PERFIL POR BOTÓN "INGRESAR" QUE LANCE UN MODAL
+const mostrarColeccion = async () => {
+    const resp = await fetch('json/productos.json');
+    const data = await resp.json();
+    pintarColeccion(gestorStock.getNuevosIngresos(data));
+    console.log(data);
+}
 
-const mostrarColeccion = () => {
-    const nuevosIngresos = gestorStock.getNuevosIngresos();
-
-    nuevosIngresos.forEach(item => {
+const pintarColeccion = (datos) => {
+    datos.forEach(item => {
         let card = document.createElement("article");
         card.className = "card col-12 col-lg-3";
         card.innerHTML = 
