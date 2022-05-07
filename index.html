@@ -23,35 +23,35 @@
     <div class="container">
 
         <header class="row">
-
-            <div class="col-12">
-                <div class="row nav d-flex justify-content-between align-items-center">
-                    <div class="col-9 d-flex align-items-center">
-                        <div class="col-3 fs-4 fw-bold me-4">
-                            <a class="text-dark" href="index.html"> BOEDO
-                                <small class="text-muted fst-italic">Shoes</small>
-                            </a>
-                        </div>
-                        <div class="col-2"><a class="item" href="#coleccion">Colección</a></div>
-                        <div class="col-2"><a class="item constr" href="#">Acerca De</a></div>
-                        <div class="col-2"><a class="item" href="#btnContacto">Contacto</a></div>
-                    </div>
-    
-                    <div class="col-2">
-                        <div class="row justify-content-end align-items-center">
-                            <div class="col-3 constr">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid pe-0">
+                    <div class="d-flex align-items-center">     
+                        <a class="navbar-brand fs-4 fw-bold" href="#">BOEDO
+                            <small class="text-muted fst-italic">Shoes</small>
+                        </a>
+                    </div>                        
+                    
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>  
+                    
+                    <div class="w-100">
+                        <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
+                            <ul class="navbar-nav">
+                                <a class="nav-link ps-lg-4 pe-lg-4" href="#coleccion">Colección</a>
+                                <a class="nav-link ps-lg-4 pe-lg-4 constr" href="#">Acerca De</a>
+                                <a class="nav-link ps-lg-4 pe-lg-4" href="#contact_box">Contacto</a>
+                            </ul>
+                            <div class="constr">
                                 <img id="carrito_img" src="images/icon-cart.svg" alt="Carrito de compras">
                             </div>
-                            <div class="col-3 rounded-circle constr">
-                                <img class="rounded-circle" id="perfil_img" src="images/perfil_leo.jpg" alt="Perfil">
-                            </div>
-                        </div>
+                        </div>      
                     </div>
                 </div>
-                <div class="row d-flex justify-content-center">
-                    <div class="col-12 borde"></div>
-                </div>
-            </div>
+            </nav>   
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 borde"></div>
+            </div>        
         </header>
 
     </div>
@@ -130,7 +130,7 @@
     </main>
     
     <div class="container">
-        <section id=" contact_box">
+        <section id="contact_box">
             <div class="row d-flex justify-content-center">
                 <div class="col-12 borde"></div>
             </div>
