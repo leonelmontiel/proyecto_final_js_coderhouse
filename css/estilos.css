@@ -15,20 +15,12 @@ body {
     font-family: 'Kumbh Sans', sans-serif;
 }
 
-.alto {
-    height: 90vh;
-}
-
 .borde {    
     width: 95%;
     border-bottom: 1px solid rgba(128, 128, 128, 0.171);
 }
 
 /* ----- HEADER ----- */
-
-header .nav {
-    height: 10vh;
-}
 
 header a {
     text-decoration: none;
@@ -39,18 +31,14 @@ header .item {
     font-size: 0.9em;
 }
 
-#carrito_img {
-    width: 3vh;
-}
-
-#perfil_img {
-    width: 5vh;
-}
-
 /* ----- PORTADA ----- */
 
+.portada {
+    height: 100vh;
+}
+
 .portada img {
-    height: calc(100vh - 10vh);
+    height: 100vh;
     object-fit: cover;
     filter: brightness(50%);
 }
@@ -96,14 +84,4 @@ article .carousel-inner {
 
 .info__product h6 {
     font-weight: 600;
-}
-
-/* ===== KEYFRAMES ===== */
-
-@keyframes movimiento__portada {
-    from{
-        background-position: bottom left;
-    }to{
-        background-position: top right;
-    }
 }
