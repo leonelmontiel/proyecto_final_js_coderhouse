@@ -6,73 +6,41 @@
                 "id": 1,
                 "tipo": "CASUAL",
                 "marca": "BOEDO",
-                "modelo": "OTOÑO",
-                "talle": 39,
+                "modelo": "ANTON",
+                "talle": 40,
                 "color": "NEGRO",
-                "precio": 5500
+                "precio": 6500,
+                "img": "./images/productos/CASUAL/anton/anton_negro1.jpg"
             },
             {
                 "id": 2,
                 "tipo": "CASUAL",
                 "marca": "BOEDO",
-                "modelo": "OTOÑO",
+                "modelo": "ROLLING",
                 "talle": 39,
-                "color": "NEGRO",
-                "precio": 5500
+                "color": "AZUL",
+                "precio": 5700,
+                "img": "./images/productos/CASUAL/rolling/rolling_azul1.jpg"
             },
             {
                 "id": 3,
                 "tipo": "CASUAL",
                 "marca": "BOEDO",
-                "modelo": "OTOÑO",
-                "talle": 39,
-                "color": "NEGRO",
-                "precio": 5500
+                "modelo": "ROLLING",
+                "talle": 40,
+                "color": "BLANCO",
+                "precio": 5700,
+                "img": "./images/productos/CASUAL/rolling/rolling_blanco1.jpg"
             },
             {
                 "id": 4,
                 "tipo": "CASUAL",
                 "marca": "BOEDO",
-                "modelo": "OTOÑO",
-                "talle": 39,
+                "modelo": "ROLLING",
+                "talle": 42,
                 "color": "NEGRO",
-                "precio": 5500
-            },
-            {
-                "id": 5,
-                "tipo": "CASUAL",
-                "marca": "BOEDO",
-                "modelo": "SHIVA",
-                "talle": 40,
-                "color": "MARRON",
-                "precio": 5500
-            },
-            {
-                "id": 6,
-                "tipo": "CASUAL",
-                "marca": "BOEDO",
-                "modelo": "SHIVA",
-                "talle": 40,
-                "color": "MARRON",
-                "precio": 5500
-            },
-            {
-                "id": 7,
-                "tipo": "CASUAL",
-                "marca": "BOEDO",
-                "modelo": "SHIVA",
-                "talle": 40,
-                "color": "MARRON",
-                "precio": 5500
-            },
-            {
-                "id": 8,
-                "tipo": "CASUAL",
-                "marca": "BOEDO",
-                "modelo": "KELYX",
-                "talle": 41,
-                "color": "BLANCO",
-                "precio": 5500
+                "precio": 5700,
+                "img": "./images/productos/CASUAL/rolling/rolling_negro1.jpg"
             }
         ]
     },
@@ -80,121 +48,34 @@
         "tipo": "DEPORTIVO",
         "productos": [
             {
-                "id": 9,
+                "id": 5,
                 "tipo": "DEPORTIVO",
-                "marca": "BOEDO",
-                "modelo": "REDRAGON",
-                "talle": 41,
-                "color": "BLANCO",
-                "precio": 8700
-            },
-            {
-                "id": 10,
-                "tipo": "DEPORTIVO",
-                "marca": "BOEDO",
-                "modelo": "REDRAGON",
-                "talle": 41,
-                "color": "BLANCO",
-                "precio": 8700
-            },
-            {
-                "id": 11,
-                "tipo": "DEPORTIVO",
-                "marca": "BOEDO",
-                "modelo": "REDRAGON",
-                "talle": 41,
-                "color": "BLANCO",
-                "precio": 8700
-            },
-            {
-                "id": 12,
-                "tipo": "DEPORTIVO",
-                "marca": "BOEDO",
-                "modelo": "REDRAGON",
-                "talle": 41,
-                "color": "BLANCO",
-                "precio": 8700
-            },
-            {
-                "id": 13,
-                "tipo": "DEPORTIVO",
-                "marca": "BOEDO",
-                "modelo": "REDRAGON",
-                "talle": 41,
-                "color": "BLANCO",
-                "precio": 8700
-            },
-            {
-                "id": 14,
-                "tipo": "DEPORTIVO",
-                "marca": "BOEDO",
-                "modelo": "REDRAGON",
-                "talle": 41,
-                "color": "BLANCO",
-                "precio": 8700
-            },
-            {
-                "id": 15,
-                "tipo": "DEPORTIVO",
-                "marca": "BOEDO",
-                "modelo": "REDRAGON",
-                "talle": 41,
-                "color": "BLANCO",
-                "precio": 8700
-            },
-            {
-                "id": 16,
-                "tipo": "DEPORTIVO",
-                "marca": "BOEDO",
-                "modelo": "REDRAGON",
-                "talle": 41,
-                "color": "BLANCO",
-                "precio": 8700
-            },
-            {
-                "id": 17,
-                "tipo": "DEPORTIVO",
-                "marca": "BOEDO",
-                "modelo": "VERANO",
-                "talle": 41,
+                "marca": "ADIDAS",
+                "modelo": "MULTIX",
+                "talle": 40,
                 "color": "NEGRO",
-                "precio": 8700
+                "precio": 14700,
+                "img": "./images/productos/DEPORTIVO/adidas/adidas_multix_negro1.jpg"
             },
             {
-                "id": 18,
+                "id": 6,
                 "tipo": "DEPORTIVO",
-                "marca": "BOEDO",
-                "modelo": "VERANO",
+                "marca": "ADIDAS",
+                "modelo": "MULTIX",
                 "talle": 41,
-                "color": "NEGRO",
-                "precio": 8700
+                "color": "ROJO",
+                "precio": 14700,
+                "img": "./images/productos/DEPORTIVO/adidas/adidas_multix_rojo1.jpg"
             },
             {
-                "id": 19,
+                "id": 7,
                 "tipo": "DEPORTIVO",
-                "marca": "BOEDO",
-                "modelo": "RUNNING",
-                "talle": 41,
-                "color": "AZUL",
-                "precio": 8700
-            },
-            {
-                "id": 20,
-                "tipo": "DEPORTIVO",
-                "marca": "BOEDO",
-                "modelo": "RUNNING",
-                "talle": 41,
-                "color": "AZUL",
-                "precio": 8700
-            },
-            {
-                "id": 21,
-                "tipo": "DEPORTIVO",
-                "marca": "BOEDO",
-                "modelo": "RUNNING",
-                "talle": 41,
-                "color": "AZUL",
-                "precio": 8700
+                "marca": "NEW BALANCE",
+                "modelo": "574",
+                "talle": 40,
+                "color": "CAMEL",
+                "precio": 12200,
+                "img": "./images/productos/DEPORTIVO/new_balance/nb_574_camel1.jpg"
             }
         ]
     },
@@ -202,153 +83,69 @@
         "tipo": "MOCASIN",
         "productos": [
             {
-                "id": 22,
+                "id": 8,
                 "tipo": "MOCASIN",
                 "marca": "BOEDO",
                 "modelo": "GLACIAR",
                 "talle": 41,
-                "color": "BLANCO",
-                "precio": 11500
-            },
-            {
-                "id": 23,
-                "tipo": "MOCASIN",
-                "marca": "BOEDO",
-                "modelo": "GLACIAR",
-                "talle": 41,
-                "color": "BLANCO",
-                "precio": 11500
-            },
-            {
-                "id": 24,
-                "tipo": "MOCASIN",
-                "marca": "BOEDO",
-                "modelo": "GLACIAR",
-                "talle": 41,
-                "color": "BLANCO",
-                "precio": 11500
-            },
-            {
-                "id": 25,
-                "tipo": "MOCASIN",
-                "marca": "BOEDO",
-                "modelo": "GLACIAR",
-                "talle": 41,
-                "color": "BLANCO",
-                "precio": 11500
-            },
-            {
-                "id": 26,
-                "tipo": "MOCASIN",
-                "marca": "BOEDO",
-                "modelo": "CHILI PEPPERS",
-                "talle": 41,
                 "color": "MARRON",
-                "precio": 11500
+                "precio": 11500,
+                "img": "./images/productos/MOCASIN/glaciar/glaciar_marron1.jpg"
             },
             {
-                "id": 27,
+                "id": 9,
                 "tipo": "MOCASIN",
                 "marca": "BOEDO",
-                "modelo": "CHILI PEPPERS",
+                "modelo": "GUINEA",
                 "talle": 41,
-                "color": "MARRON",
-                "precio": 11500
+                "color": "AZUL",
+                "precio": 10900,
+                "img": "./images/productos/MOCASIN/guinea/guinea_azul1.jpg"
             },
             {
-                "id": 28,
+                "id": 10,
                 "tipo": "MOCASIN",
                 "marca": "BOEDO",
-                "modelo": "CHILI PEPPERS",
-                "talle": 41,
-                "color": "MARRON",
-                "precio": 11500
-            },
-            {
-                "id": 29,
-                "tipo": "MOCASIN",
-                "marca": "BOEDO",
-                "modelo": "CHILI PEPPERS",
-                "talle": 41,
-                "color": "MARRON",
-                "precio": 11500
-            },
-            {
-                "id": 30,
-                "tipo": "MOCASIN",
-                "marca": "BOEDO",
-                "modelo": "CHILI PEPPERS",
-                "talle": 41,
-                "color": "MARRON",
-                "precio": 11500
-            },
-            {
-                "id": 31,
-                "tipo": "MOCASIN",
-                "marca": "BOEDO",
-                "modelo": "APA BEER",
-                "talle": 41,
+                "modelo": "SALTA",
+                "talle": 44,
                 "color": "NEGRO",
-                "precio": 11500
-            },
-            {
-                "id": 32,
-                "tipo": "MOCASIN",
-                "marca": "BOEDO",
-                "modelo": "APA BEER",
-                "talle": 41,
-                "color": "NEGRO",
-                "precio": 11500
+                "precio": 12900,
+                "img": "./images/productos/MOCASIN/salta/salta_negro1.jpg"
             }
         ]
     },
     {
-        "tipo": "NAUTICO",
+        "tipo": "OJOTA",
         "productos": [
             {
-                "id": 33,
-                "tipo": "NAUTICO",
-                "marca": "BOEDO",
+                "id": 11,
+                "tipo": "OJOTA",
+                "marca": "HAVAIANAS",
                 "modelo": "SHIVA",
                 "talle": 41,
+                "color": "NEGRO",
+                "precio": 3200,
+                "img": "./images/productos/OJOTA/havaianas/havaianas_negro1.jpg"
+            },
+            {
+                "id": 12,
+                "tipo": "OJOTA",
+                "marca": "HAVAIANAS",
+                "modelo": "SHIVA",
+                "talle": 41,
+                "color": "AZUL",
+                "precio": 3200,
+                "img": "./images/productos/OJOTA/havaianas/havaianas_azul1.jpg"
+            },
+            {
+                "id": 13,
+                "tipo": "OJOTA",
+                "marca": "HAVAIANAS",
+                "modelo": "SHIVA",
+                "talle": 42,
                 "color": "BLANCO",
-                "precio": 6200
-            },
-            {
-                "id": 34,
-                "tipo": "NAUTICO",
-                "marca": "BOEDO",
-                "modelo": "CHILI PEPPERS",
-                "talle": 41,
-                "color": "MARRON",
-                "precio": 6200
-            },
-            {
-                "id": 35,
-                "tipo": "NAUTICO",
-                "marca": "BOEDO",
-                "modelo": "CHILI PEPPERS",
-                "talle": 41,
-                "color": "MARRON",
-                "precio": 6200
-            },
-            {
-                "id": 36,
-                "tipo": "NAUTICO",
-                "marca": "BOEDO",
-                "modelo": "APA BEER",
-                "talle": 41,
-                "color": "NEGRO",
-                "precio": 6200
-            },
-            {
-                "id": 37,
-                "tipo": "NAUTICO",
-                "marca": "BOEDO",
-                "modelo": "APA BEER",
-                "talle": 41,
-                "color": "NEGRO",
-                "precio": 6200
+                "precio": 3200,
+                "img": "./images/productos/OJOTA/havaianas/havaianas_b&n1.jpg"
             }
         ]
     }

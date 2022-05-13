@@ -32,5 +32,18 @@ const gestorStock = {
             deCadaTipo.push(productos[0]);
         });       
         return deCadaTipo;        
+    },
+
+    getTipos: function(data) {
+        let tipos = [];        
+        data.forEach(stock => {
+            tipos.push(stock.tipo);
+        });       
+        return tipos;        
+    },
+
+    getProductosTipo: function(data, tipo) {
+        let _tipo = data.find(e => e.tipo === tipo)
+        return _tipo.productos
     }
 }

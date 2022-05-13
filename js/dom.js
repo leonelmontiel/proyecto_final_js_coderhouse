@@ -54,12 +54,10 @@ function mostrarFormIngresado(nombre, correo, asunto, mensaje) {
     Mensaje: ${mensaje}`);
 }
 
-// REEMPLAZAR IMAGEN PERFIL POR BOTÓN "INGRESAR" QUE LANCE UN MODAL
 const mostrarColeccion = async () => {
     const resp = await fetch('json/productos.json');
     const data = await resp.json();
     pintarColeccion(gestorStock.getNuevosIngresos(data));
-    console.log(data);
 }
 
 const pintarColeccion = (datos) => {
@@ -68,12 +66,13 @@ const pintarColeccion = (datos) => {
         card.className = "card col-12 col-lg-3";
         card.innerHTML = 
         `
-        <img src="./images/productos/${item.tipo}/${item.modelo}1.jpg" height="250px" class="card-img-top">
+        <img src="${item.img}" height="250px" class="card-img-top">
         <div class="card-body">
             <div class="col-12">
                 <button type="button" class="btn btn-warning btn-lang fw-bold lh-1 p-1 h-25 mb-2" id="tipo">${item.tipo}</button>
             </div>
             <h6 class="card-title">${item.marca} ${item.modelo}</h6>
+            <h6 class="card-color">${item.color}</h6>
             <div class="col-12 fw-bold">$${item.precio}</div>
             <a href="./articulo.html">
             <button type="button" class="btn btn-success mt-2">COMPRAR</button>
@@ -81,5 +80,58 @@ const pintarColeccion = (datos) => {
         </div>        
         `    
         document.getElementById('coleccion-item').appendChild(card);
+    })
+}
+
+const mostrarCategorias = async () => {
+    const resp = await fetch('json/productos.json');
+    const data = await resp.json();
+    pintarCategorias(gestorStock.getTipos(data));
+}
+
+const pintarCategorias = (datos) => {
+    datos.forEach(item => {
+        let card = document.createElement("article");
+        card.className = "col-12 col-lg-2";
+        card.innerHTML = 
+        `
+        <button onclick="mostrarProductos('${item}')" type="button" class="btn btn-dark w-100 pt-3 pb-3">${item}</button>     
+        `    
+        document.getElementById('categorias-item').appendChild(card);
+    })
+}
+
+const mostrarProductos = async (tipo) => {
+    const resp = await fetch('json/productos.json');
+    const data = await resp.json();
+    vaciarHTML("productos-item")
+    pintarProductosCat(gestorStock.getProductosTipo(data, tipo))
+}
+
+const vaciarHTML = (idHTML) => {
+    const myNode = document.getElementById(idHTML);
+    myNode.textContent = '';
+}
+
+const pintarProductosCat = (datos) => {
+    datos.forEach(item => {
+        let card = document.createElement("article");
+        card.className = "card col-12 col-lg-3";
+        card.innerHTML = 
+        `
+        <img src="${item.img}" height="250px" class="card-img-top">
+        <div class="card-body">
+            <div class="col-12">
+                <button type="button" class="btn btn-warning btn-lang fw-bold lh-1 p-1 h-25 mb-2" id="tipo">${item.tipo}</button>
+            </div>
+            <h6 class="card-title">${item.marca} ${item.modelo}</h6>
+            <h6 class="card-color">${item.color}</h6>
+            <div class="col-12 fw-bold">$${item.precio}</div>
+            <a href="./articulo.html">
+            <button type="button" class="btn btn-success mt-2">COMPRAR</button>
+            </a>
+        </div>        
+        `    
+        document.getElementById('productos-item').appendChild(card);
     })
 }
