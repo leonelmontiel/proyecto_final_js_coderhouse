@@ -23,8 +23,8 @@
     <div class="container">
 
         <header class="row fixed-top bg-white">
-            <nav class="navbar navbar-expand-lg navbar-light ">
-                <div class="container-fluid pe-0">
+            <nav class="navbar navbar-expand-lg navbar-light justify-content-center">
+                <div class="container-fluid  col-lg-10">
                     <div class="d-flex align-items-center">     
                         <a class="navbar-brand fs-4 fw-bold" href="./index.html">BOEDO
                             <small class="text-muted fst-italic">Shoes</small>
@@ -43,8 +43,10 @@
                                 <a class="nav-link ps-lg-4 pe-lg-4" href="#acerca_de">Acerca De</a>
                                 <a class="nav-link ps-lg-4 pe-lg-4" href="#contact_box">Contacto</a>
                             </ul>
-                            <div class="constr">
-                                <img id="carrito_img" src="images/icon-cart.svg" alt="Carrito de compras">
+                            <div>
+                                <a href="./carrito.html">
+                                    <img id="carrito_img" src="images/icon-cart.svg" alt="Carrito de compras">
+                                </a>
                             </div>
                         </div>      
                     </div>
@@ -212,7 +214,7 @@
                         </div>
                         <!-- BOTON CONTACTO CON FORMULARIO -->
                         <div class="col-12">
-                            <div class="modal" tabindex="-1" id="modalForm">
+                            <div class="modal text-dark" tabindex="-1" id="modalForm">
                                 <div class="modal-dialog">
                                     <div class="modal-content bg-warning">
                                         <div class="modal-header">
@@ -286,5 +288,6 @@
     <script src="./js/alerts.js"></script>
     <script src="./js/database.js"></script>
     <script src="./js/dom.js"></script>
+    <script src="./js/carrito.js"></script>
 </body>
 </html>

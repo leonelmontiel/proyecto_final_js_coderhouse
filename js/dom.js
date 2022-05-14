@@ -1,5 +1,3 @@
-// CÓDIGO PARA DESAFÍO COMPLEMENTARIO: INTERACTUAR CON HTML
-
 let feriados = document.getElementById("feriados");
 
 let identificadorIntervaloDeTiempo;
@@ -55,9 +53,14 @@ function mostrarFormIngresado(nombre, correo, asunto, mensaje) {
 }
 
 const mostrarColeccion = async () => {
-    const resp = await fetch('json/productos.json');
-    const data = await resp.json();
-    pintarColeccion(gestorStock.getNuevosIngresos(data));
+    try {
+        const resp = await fetch('json/productos.json');
+        const data = await resp.json();
+        pintarColeccion(gestorStock.getNuevosIngresos(data));
+    } catch (error) {
+       console.log(error); 
+    }
+    
 }
 
 const pintarColeccion = (datos) => {
@@ -66,17 +69,16 @@ const pintarColeccion = (datos) => {
         card.className = "card col-12 col-lg-3";
         card.innerHTML = 
         `
-        <img src="${item.img}" height="250px" class="card-img-top">
+        <img src="${item.img}" height="250px" class="card-img-top" id="prod-img">
         <div class="card-body">
             <div class="col-12">
-                <button type="button" class="btn btn-warning btn-lang fw-bold lh-1 p-1 h-25 mb-2" id="tipo">${item.tipo}</button>
+                <button type="button" class="btn btn-warning btn-lang fw-bold lh-1 p-1 h-25 mb-2" id="prod-tipo">${item.tipo}</button>
             </div>
-            <h6 class="card-title">${item.marca} ${item.modelo}</h6>
-            <h6 class="card-color">${item.color}</h6>
-            <div class="col-12 fw-bold">$${item.precio}</div>
-            <a href="./articulo.html">
-            <button type="button" class="btn btn-success mt-2">COMPRAR</button>
-            </a>
+            <h6 class="card-title fw-bold"><span id="prod-brand">${item.marca}</span> <span id="prod-model">${item.modelo}</span></h6>
+            <h6 id="prod-color">${item.color}</h6>
+            <h6 id="prod-size">Talle ${item.talle}</h6>
+            <div class="col-12 fw-bold" id="prod-price">$${item.precio}</div>
+            <button type="button" class="btn btn-success mt-2 w-100" data-id=${item.id}>COMPRAR</button>
         </div>        
         `    
         document.getElementById('coleccion-item').appendChild(card);
@@ -84,9 +86,14 @@ const pintarColeccion = (datos) => {
 }
 
 const mostrarCategorias = async () => {
-    const resp = await fetch('json/productos.json');
-    const data = await resp.json();
-    pintarCategorias(gestorStock.getTipos(data));
+    try {
+        const resp = await fetch('json/productos.json');
+        const data = await resp.json();
+        pintarCategorias(gestorStock.getTipos(data));
+    } catch (error) {
+        console.log(error);
+    }
+    
 }
 
 const pintarCategorias = (datos) => {
@@ -102,10 +109,15 @@ const pintarCategorias = (datos) => {
 }
 
 const mostrarProductos = async (tipo) => {
-    const resp = await fetch('json/productos.json');
-    const data = await resp.json();
-    vaciarHTML("productos-item")
-    pintarProductosCat(gestorStock.getProductosTipo(data, tipo))
+    try {
+        const resp = await fetch('json/productos.json');
+        const data = await resp.json();
+        vaciarHTML("productos-item")
+        pintarProductosCat(gestorStock.getProductosTipo(data, tipo))
+    } catch (error) {
+        console.log(error);
+    }
+    
 }
 
 const vaciarHTML = (idHTML) => {
@@ -119,18 +131,17 @@ const pintarProductosCat = (datos) => {
         card.className = "card col-12 col-lg-3";
         card.innerHTML = 
         `
-        <img src="${item.img}" height="250px" class="card-img-top">
+        <img src="${item.img}" height="250px" class="card-img-top" id="prod-img">
         <div class="card-body">
             <div class="col-12">
-                <button type="button" class="btn btn-warning btn-lang fw-bold lh-1 p-1 h-25 mb-2" id="tipo">${item.tipo}</button>
+                <button type="button" class="btn btn-warning btn-lang fw-bold lh-1 p-1 h-25 mb-2" id="prod-tipo">${item.tipo}</button>
             </div>
-            <h6 class="card-title">${item.marca} ${item.modelo}</h6>
-            <h6 class="card-color">${item.color}</h6>
-            <div class="col-12 fw-bold">$${item.precio}</div>
-            <a href="./articulo.html">
-            <button type="button" class="btn btn-success mt-2">COMPRAR</button>
-            </a>
-        </div>        
+            <h6 class="card-title fw-bold"><span id="prod-brand">${item.marca}</span> <span id="prod-model">${item.modelo}</span></h6>
+            <h6 id="prod-color">${item.color}</h6>
+            <h6 id="prod-size">Talle ${item.talle}</h6>
+            <div class="col-12 fw-bold" id="prod-price">$${item.precio}</div>
+            <button type="button" class="btn btn-success mt-2 w-100" data-id=${item.id}>COMPRAR</button>
+        </div>     
         `    
         document.getElementById('productos-item').appendChild(card);
     })
