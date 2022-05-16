@@ -76,8 +76,8 @@ const pintarColeccion = (datos) => {
             </div>
             <h6 class="card-title fw-bold"><span id="prod-brand">${item.marca}</span> <span id="prod-model">${item.modelo}</span></h6>
             <h6 id="prod-color">${item.color}</h6>
-            <h6 id="prod-size">Talle ${item.talle}</h6>
-            <div class="col-12 fw-bold" id="prod-price">$${item.precio}</div>
+            <h6>Talle <span id="prod-size">${item.talle}</span></h6>
+            <div class="col-12 fw-bold">$ <span id="prod-price">${item.precio}</span></div>
             <button type="button" class="btn btn-success mt-2 w-100" data-id=${item.id}>COMPRAR</button>
         </div>        
         `    
@@ -138,8 +138,8 @@ const pintarProductosCat = (datos) => {
             </div>
             <h6 class="card-title fw-bold"><span id="prod-brand">${item.marca}</span> <span id="prod-model">${item.modelo}</span></h6>
             <h6 id="prod-color">${item.color}</h6>
-            <h6 id="prod-size">Talle ${item.talle}</h6>
-            <div class="col-12 fw-bold" id="prod-price">$${item.precio}</div>
+            <h6>Talle <span id="prod-size">${item.talle}</span></h6>
+            <div class="col-12 fw-bold">$ <span id="prod-price">${item.precio}</span></div>
             <button type="button" class="btn btn-success mt-2 w-100" data-id=${item.id}>COMPRAR</button>
         </div>     
         `    

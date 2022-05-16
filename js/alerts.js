@@ -21,3 +21,13 @@ function succesAlert(title, text, timer) {
       })
 }
 
+function errorAlert(title, text, timer) {
+    Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: title,
+        text: text,
+        showConfirmButton: false,
+        timer: timer
+      })
+}

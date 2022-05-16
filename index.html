@@ -44,9 +44,8 @@
                                 <a class="nav-link ps-lg-4 pe-lg-4" href="#contact_box">Contacto</a>
                             </ul>
                             <div>
-                                <a href="./carrito.html">
-                                    <img id="carrito_img" src="images/icon-cart.svg" alt="Carrito de compras">
-                                </a>
+                                <img src="images/icon-cart.svg" alt="Carrito de compras"
+                                data-bs-toggle="modal" data-bs-target="#exampleModalLong">   
                             </div>
                         </div>      
                     </div>
@@ -57,6 +56,91 @@
             </div>        
         </header>
 
+    </div>
+
+    <div class="modal fade" id="exampleModalLong" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Carrito de compras</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container table-responsive">
+
+                            <form action="" id="form_compra">
+                                <fieldset>
+                                    <legend class="fs-6">Para que te podamos enviar el formulario de pago y envío rellená estos campos</legend>
+                                    <div class="mb-2">
+                                        <input type="text" class="form-control"
+                                            id="nombreCompra" placeholder="Nombre">
+                                    </div>
+                                    <div class="mb-2">
+                                        <input type="email"
+                                            class="form-control" id="emailCompra"
+                                            placeholder="Correo electrónico">
+                                    </div>
+                                </fieldset>
+                            </form>     
+
+                            <table class="table">
+                            <thead>
+                                <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Item</th>
+                                <th scope="col">Color</th>
+                                <th scope="col">Talle</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Acción</th>
+                                <th scope="col">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="items"></tbody>
+                            <tfoot>
+                                <tr id="footer">
+                                <th scope="row" colspan="5">Carrito vacío - comience a comprar!</th>
+                                </tr>
+                            </tfoot>
+                            </table>
+                        
+
+                            <template id="template-carrito">
+                                <tr>
+                                <th scope="row">id</th>
+                                <td>Item</td>
+                                <td>Color</td>
+                                <td>Size</td>
+                                <td>Quantity</td>
+                                <td>
+                                    <button class="btn btn-info btn-sm">
+                                        +
+                                    </button>
+                                    <button class="btn btn-danger btn-sm">
+                                        -
+                                    </button>
+                                </td>
+                                <td>$ <span>500</span></td>
+                                </tr>
+                            </template>
+
+                            <template id="template-footer">
+                                <th scope="row" colspan="4" class="bg-warning">Total productos</th>
+                                <td class="bg-warning">Cantidad Total</td>
+                                <td class="bg-warning">
+                                    <button class="btn btn-danger btn-sm" id="vaciar-carrito">
+                                        vaciar todo
+                                    </button>
+                                </td>
+                                <td class="font-weight-bold bg-warning">$ <span>Total precio</span></td>
+                            </template>
+                        </div>
+                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-success" onclick="validarCompra()">Comprar</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="container-fluid container__portada">
