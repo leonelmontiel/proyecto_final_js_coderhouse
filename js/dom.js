@@ -64,10 +64,12 @@ const mostrarColeccion = async () => {
 }
 
 const pintarColeccion = (datos) => {
+    const title = 'Producto añadido al carrito!'
     datos.forEach(item => {
+        const text = `El calzado ${item.marca} ${item.modelo} color ${item.color} talle ${item.talle} fue correctamente añadido al carrito`
         let card = document.createElement("article");
         card.className = "card col-12 col-lg-3";
-        card.innerHTML = 
+        card.innerHTML =
         `
         <img src="${item.img}" height="250px" class="card-img-top" id="prod-img">
         <div class="card-body">
@@ -78,7 +80,7 @@ const pintarColeccion = (datos) => {
             <h6 id="prod-color">${item.color}</h6>
             <h6>Talle <span id="prod-size">${item.talle}</span></h6>
             <div class="col-12 fw-bold">$ <span id="prod-price">${item.precio}</span></div>
-            <button type="button" class="btn btn-success mt-2 w-100" data-id=${item.id}>COMPRAR</button>
+            <button onclick="succesAlert('${title}', '${text}', 4000)"  type="button" class="btn btn-success mt-2 w-100" data-id=${item.id}><i class="fa-solid fa-cart-plus fs-5"></i></button>
         </div>        
         `    
         document.getElementById('coleccion-item').appendChild(card);
@@ -126,7 +128,9 @@ const vaciarHTML = (idHTML) => {
 }
 
 const pintarProductosCat = (datos) => {
+    const title = 'Producto añadido al carrito!'
     datos.forEach(item => {
+        const text = `El calzado ${item.marca} ${item.modelo} color ${item.color} talle ${item.talle} fue correctamente añadido al carrito`
         let card = document.createElement("article");
         card.className = "card col-12 col-lg-3";
         card.innerHTML = 
@@ -140,7 +144,7 @@ const pintarProductosCat = (datos) => {
             <h6 id="prod-color">${item.color}</h6>
             <h6>Talle <span id="prod-size">${item.talle}</span></h6>
             <div class="col-12 fw-bold">$ <span id="prod-price">${item.precio}</span></div>
-            <button type="button" class="btn btn-success mt-2 w-100" data-id=${item.id}>COMPRAR</button>
+            <button onclick="succesAlert('${title}', '${text}', 4000)"  type="button" class="btn btn-success mt-2 w-100" data-id=${item.id}><i class="fa-solid fa-cart-plus fs-5"></i></button>
         </div>     
         `    
         document.getElementById('productos-item').appendChild(card);
